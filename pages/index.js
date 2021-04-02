@@ -11,6 +11,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <h1>Main Menu</h1>
+        <Link href="/discover">
+          <button>
+            Discover Pokémons
+          </button>
+        </Link>
+        <Link href="/owned">
+          <button>
+            My Pokémons
+          </button>
+        </Link>
+      
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
