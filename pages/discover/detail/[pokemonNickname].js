@@ -79,6 +79,14 @@ const Detail=()=>{
     }
 
     useEffect(()=>{
+        console.log(error)
+    },[error])
+
+    useEffect(()=>{
+        console.log(data)
+    },[data])
+
+    useEffect(()=>{
         if(catchModal == false)   setForm({name: ''})
     },[catchModal])
 
@@ -125,24 +133,27 @@ const Detail=()=>{
             closeHandler={closeToast}>
                 <h5>{toast.message}</h5>
             </Toast>
-
             {
                 loading ? <LoadingSpinner></LoadingSpinner>: ''
             }
             {
-                error ? <ErrorComponent title="Sorry!" message="We can't find pokemon what you are looking for"></ErrorComponent>: ''
+                error ? <ErrorComponent title="Sorry!" message="There is error(s) while gathering the data. Please try again"></ErrorComponent>: ''
             }
             {
                 data ?
-                <div>
-                    <img src={data.pokemon.sprites.front_default}
-                    className={[bounceSprite]}/>
-                    <h3 className="text-center">{data.pokemon.name}</h3>
-                    <button onClick={catchPokemons}>
-                        Catch!
-                    </button>
-                </div>
-                : ''
+                    data.pokemon.id ?
+                    <div>
+                        <img src={data.pokemon.sprites.front_default}
+                        className={[bounceSprite]}/>
+                        <h3 className="text-center">{data.pokemon.name}</h3>
+                        <button onClick={catchPokemons}>
+                            Catch!
+                        </button>
+                    </div>
+                    : <ErrorComponent
+                    title="Uh Oh!"
+                    message="We can't find pokemon what you are looking for"></ErrorComponent>
+                :''
             }
         </div>
     )
