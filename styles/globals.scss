@@ -45,16 +45,20 @@ button{
   margin-bottom: 8pt;
   border-radius: 4pt;
   cursor: pointer;
-  border: 1px solid #6A6A6A;
+  border: 1px solid #6A6A6AA0;
   margin-bottom: 8pt;
+  animation: all 0.3s;
+  outline: none;
   &.primary{
+    color: white;
     background-color: $primary;
-    &:hover{
-      background-color: darken($primary, 10%);
-    }
+  }
+  &:hover{
+    filter: brightness(1.2);
   }
   &:disabled{
-    outline: none;
+    pointer-events: none;
+    filter: grayscale(0.8);
   }
 }
 

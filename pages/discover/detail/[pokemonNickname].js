@@ -45,39 +45,42 @@ const Detail=()=>{
     )
 
     const [catchModal, setCatchModal] = useState(false) 
-    const [failToast, setFailToast] = useState({shown: false, message: ''}) 
-    const [successToast, setSuccessToast] = useState({shown: false, message: ''}) 
+    const [toast, setToast] = useState({shown: false, message: '', theme: ''}) 
     const [form, setForm] = useState({name: ''}) 
 
     const closeCatchModalHandler=()=>{
         setCatchModal(false)
     }
 
-    const closeSuccessToastHandler=()=>{
-        setSuccessToast({...successToast, shown: false})
-    }
-
-    const closeFailToastHandler=()=>{
-        setFailToast({...failToast, shown: false})
+    const closeToast=()=>{
+        setToast({...toast, shown: false})
     }
 
     const submitPokemon=()=>{
         console.log("HAHAHAHA")
         if(ps.isPokemonNicknameExists(data.pokemon.id, form.name)){
-            setFailToast({message:`Pokemon with nickname "${form.name}" is exists in this pokemon type! please choose other nickname`, shown: true})
+            setToast(
+                {message:`Pokemon with nickname "${form.name}" is exists in this pokemon type! please choose other nickname`,
+                shown: true, 
+                theme: 'danger'
+            })
         }else{
             ps.addSavedPokemons(
                 data.pokemon.id, form.name
             )
             setCatchModal(false)
             setForm({name: ''})
-            setSuccessToast({shown: true, message: 'Pokemon has been saved successfully!'})
+            setToast({
+                shown: true, 
+                message: 'Nice nickname! Your pokemon has been saved successfully!',
+                theme: 'primary'
+            })
         }
     }
 
     useEffect(()=>{
-        console.log(data)  
-    },[data])
+        if(catchModal == false)   setForm({name: ''})
+    },[catchModal])
 
     const onChangeNickname=(event)=>{
         setForm({...form, name: event.target.value})
@@ -90,7 +93,11 @@ const Detail=()=>{
             setCatchModal(true)
         }else{
             console.log("Catch fails!")
-            setFailToast({message:'Your pokemon has run away! Please try again later', shown: true})
+            setToast({
+                message:'Your pokemon has run away! Please try again later',
+                shown: true,
+                theme: 'danger'
+            })
         }
     }
 
@@ -98,28 +105,27 @@ const Detail=()=>{
         <div className="container">
             <h4>Pokémon Details</h4>
             <Modal
-            show={catchModal}
-            closeHandler={closeCatchModalHandler}>
+            show={catchModal}>
                 <h3>You've caught this pokemon!</h3>
                 <label>Let's give it a nice nickname</label>
                 <div>
-                    <input value={form.name} onChange={onChangeNickname}></input>
+                    <input value={form.name}
+                    placeholder="Type nickname here..."
+                    onChange={onChangeNickname}></input>
                 </div>
-                <button class="primary" disabled={!form.name}
-                onClick={submitPokemon}>Submit</button>
+                <button className="secondary" onClick={closeCatchModalHandler}>
+                    Never mind, release it
+                </button>
+                <button className="primary" disabled={!form.name}
+                onClick={submitPokemon}>Save it!</button>
             </Modal>
-            <Toast theme="success"
-            show={successToast.shown}
+            <Toast theme={toast.theme}
+            show={toast.shown}
             timeout="3000"
-            closeHandler={closeSuccessToastHandler}>
-                <h5>{successToast.message}</h5>
+            closeHandler={closeToast}>
+                <h5>{toast.message}</h5>
             </Toast>
-            <Toast theme="danger"
-            show={failToast.shown}
-            timeout="3000"
-            closeHandler={closeFailToastHandler}>
-                <h5>{failToast.message}</h5>
-            </Toast>
+
             {
                 loading ? <LoadingSpinner></LoadingSpinner>: ''
             }

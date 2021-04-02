@@ -39,6 +39,10 @@ const toastTheme={
         background-color: ${ColorPallete.primary};
         color: white;
     `,
+    secondary: css`
+        background-color: ${ColorPallete.secondary};
+        color: white;
+    `,
     success: css`
         background-color: ${ColorPallete.success};
         color: white;
@@ -53,12 +57,11 @@ const Toast =({show, theme, timeout, closeHandler, children})=>{
     var timeoutFn=null
 
     useEffect(()=>{
+        timeoutFn ? clearTimeout(timeoutFn): null
         if(show){
             timeoutFn=setTimeout(() =>{
                 closeHandler()
             }, timeout || 3000)
-        }else{
-            timeoutFn ? clearTimeout(timeoutFn): null
         }
     },[show])
    

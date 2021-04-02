@@ -42,11 +42,12 @@ const Modal =({show, closeHandler, children})=>{
                 <div>
                     {children}
                 </div>
+                {closeHandler ? 
                 <div>
                     <button onClick={closeHandler}>
                         Dismiss
                     </button>
-                </div>
+                </div> : ''}
             </div>
         </div>
     )
