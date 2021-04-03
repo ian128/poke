@@ -39,7 +39,7 @@ const Detail=()=>{
         GET_POKEMONS_DETAIL,
         {
             variables: { 
-                name: router.query.pokemonNickname,
+                name: router.query.pokemonName,
             },
         }
     )
@@ -66,13 +66,13 @@ const Detail=()=>{
             })
         }else{
             ps.addSavedPokemons(
-                data.pokemon.id, form.name
+                data.pokemon.id, data.pokemon.name, form.name
             )
             setCatchModal(false)
             setForm({name: ''})
             setToast({
                 shown: true, 
-                message: 'Nice nickname! Your pokemon has been saved successfully!',
+                message: `Nice nickname! Pokemon with nickname '${form.name}' has been saved successfully!`,
                 theme: 'primary'
             })
         }
@@ -87,6 +87,7 @@ const Detail=()=>{
     },[data])
 
     useEffect(()=>{
+        //when catch modal is not launch, empty the form
         if(catchModal == false)   setForm({name: ''})
     },[catchModal])
 
@@ -102,7 +103,7 @@ const Detail=()=>{
         }else{
             console.log("Catch fails!")
             setToast({
-                message:'Your pokemon has run away! Please try again later',
+                message:'Oops! We cannot catch your pokemon this time. Please try again',
                 shown: true,
                 theme: 'danger'
             })
