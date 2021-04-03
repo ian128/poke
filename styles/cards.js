@@ -9,20 +9,20 @@ export const GridStyles=css`
     max-width: 800px;
     margin-top: 3rem;
     ${ScreenBreakpoints.md}{
-        width: 100%;
+        max-width: 100%;
         flex-direction: column;
+    }
+    ${ScreenBreakpoints.lg}{
+        flex-direction: row;
     }
 `
 
 export const CardStyles=css`
-    margin: 1rem;
+    margin: 4pt;
     padding: 1.5rem;
     text-align: left;
     text-decoration: none;
     border: 1px solid #eaeaea;
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
-    ${ScreenBreakpoints.sm}{
-        
-    }
 `

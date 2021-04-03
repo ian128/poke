@@ -11,15 +11,17 @@ export class PokemonStorageService{
         ls.set(this.#key, data)
     }
 
-    getSavedPokemonsByNickname(nickname){
-        let savedPokemonsList = this.getSavedPokemons()
+    removeSavedPokemons(nickname){
+        let state = this.getSavedPokemons()
+        state = state.filter(item => item.nickname !== nickname)
+        this.savePokemons(state)
     }
 
     isPokemonNicknameExists(pokemon_id, nickname){
         try{
             let state = this.getSavedPokemons()
-            let cursor = state.find(item => item.pokemon_id == pokemon_id)
-            return cursor.nicknames.find(item => item === nickname)
+            let cursor = state.find(item => item.nickname == nickname)
+            return cursor
         }catch(e){
             console.warn(e)
             return false
@@ -29,19 +31,12 @@ export class PokemonStorageService{
     addSavedPokemons(pokemon_id, pokemon_name, nickname){
         console.log(pokemon_id, nickname)
         let state = this.getSavedPokemons()
-
-        console.log(state)
-        let cursor = state.findIndex(item => item.pokemon_id == pokemon_id)
-        if(cursor !== -1){
-            state[cursor].nicknames.push(nickname)
-        }else{
-            state.push({
-                pokemon_id: pokemon_id,
-                pokemon_name: pokemon_name,
-                nicknames: [nickname]
-            })
-        }
-
+        state.push({
+            pokemon_id: pokemon_id,
+            pokemon_name: pokemon_name,
+            nickname: nickname,
+            caughtOn: new Date().getTime()
+        })
         this.savePokemons(state)
     }
 }

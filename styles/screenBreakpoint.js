@@ -1,5 +1,5 @@
 export const ScreenBreakpoints={
-    xs: ``,
+    xs: `@media (min-width: 0px)`,
     sm: `@media (min-width: 576px)`,
     md: `@media (min-width: 768px)`,
     lg: `@media (min-width: 992px)`,
