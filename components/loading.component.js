@@ -1,4 +1,7 @@
-import { css, keyframes } from '@emotion/css'
+/** @jsxRuntime classic /
+/* @jsx jsx */
+import { jsx, css, keyframes } from '@emotion/react'
+import { ColorPallete } from '../styles/colors'
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
     transform: translate3d(0,0,0);
@@ -20,10 +23,12 @@ const bounce = keyframes`
 export function LoadingSpinner(){
     return(
         <div
-            className={css`
+            css={css`
             margin-top: 12pt;
             margin-bottom: 12pt;
             animation: ${bounce} 0.8s ease infinite;
+            background-color; ${ColorPallete.secondary}
+            padding: 8pt;
             `}>
             Loading
         </div>

@@ -11,7 +11,7 @@ import Modal from '../../../components/modal.component';
 import Toast from '../../../components/toast.component';
 import { PokemonStorageService } from '../../../service/pokemon-storage.service';
 import SeeMore from '../../../components/see-more.component';
-import { CenterContainerCss, ContainerCss, FlexContainerCss } from '../../../styles/container';
+import { CenterContainerCss, ContainerCss, FlexContainerCss, CurvedCss} from '../../../styles/container';
 import { PillCSS } from '../../../styles/pill';
 import ButtonCss from '../../../styles/button';
 
@@ -119,7 +119,8 @@ const Detail=()=>{
     return (
         <>
         <h4 css={css`text-align: center`}>Pokémon Details</h4>
-        <div css={[ContainerCss]}>
+        <div css={[CurvedCss]}></div>
+        <div css={[ContainerCss, css`margin-top: -84pt`]}>
             <Modal
             show={catchModal}>
                 <h3>You have caught this pokemon!</h3>
@@ -169,8 +170,8 @@ const Detail=()=>{
                             minHeight="3em">
                                 <div css={FlexContainerCss}>
                                 {
-                                    data.pokemon.moves.map(item=>{
-                                        return <div css={[PillCSS.pill, PillCSS.primary]}>{item.move.name}</div>
+                                    data.pokemon.moves.map((item, index)=>{
+                                        return <div key={index} css={[PillCSS.pill, PillCSS.primary]}>{item.move.name}</div>
                                     })
                                 }      
                                 </div>           
@@ -179,11 +180,11 @@ const Detail=()=>{
                         <div>
                             <h3>Types</h3>
                             <SeeMore
-                            minHeight="3em">
+                            minHeight="2em">
                                 <div css={FlexContainerCss}>
                                 {
-                                    data.pokemon.types.map(item=>{
-                                        return <div css={[PillCSS.pill, PillCSS.primary]}>{item.type.name}</div>
+                                    data.pokemon.types.map((item, index)=>{
+                                        return <div key={index} css={[PillCSS.pill, PillCSS.primary]}>{item.type.name}</div>
                                     })
                                 }      
                                 </div>           
