@@ -3,5 +3,6 @@ export const ColorPallete={
     secondary: '#566574',
     success: '#49896F',
     danger: '#E13620',
+    info: '#17A2B8',
     gray: '#CACACA'
 }

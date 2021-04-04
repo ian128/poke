@@ -33,7 +33,7 @@ const bounceKeyframe = keyframes`
   }
 `
 const bounceSprite = css`
-    height: 128pt;
+    height: 144pt;
     animation: ${bounceKeyframe} 3.0s ease infinite;
 `
 
@@ -145,7 +145,7 @@ const Detail=()=>{
             {
                 loading ?
                 <div css={CenterContainerCss}>
-                    <LoadingSpinner></LoadingSpinner>
+                    <LoadingSpinner color="white"></LoadingSpinner>
                 </div>: ''
             }
             {
@@ -163,7 +163,7 @@ const Detail=()=>{
                             <img src={data.pokemon.sprites.front_default}
                             css={[bounceSprite]}/>
                         </div>
-                        <h3 className="text-center">{data.pokemon.name}</h3>
+                        <h1 css={css`text-align:center; margin-top: 0`}>{data.pokemon.name}</h1>
                         <div>
                             <h3>Moves</h3>
                             <SeeMore
@@ -195,11 +195,16 @@ const Detail=()=>{
                         </button>
                     </div>
                     :
-                    <div css={CenterContainerCss}>
+                    <div css={[CenterContainerCss, css`flex-direction: column`]}>
                         <ErrorComponent
+                            color="white"
                             title="Uh Oh!"
                             message="We can't find pokemon what you are looking for">     
                         </ErrorComponent>
+                        <button css={[ButtonCss.btn, ButtonCss.info, css`margin-top: 8pt`]}
+                        onClick={()=>{router.replace('/discover')}}>
+                            Click Here to return to Pokemon list
+                        </button>
                     </div>
                 :''
             }

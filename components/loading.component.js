@@ -20,15 +20,14 @@ const bounce = keyframes`
   }
 `
 
-export function LoadingSpinner(){
+export const LoadingSpinner=({color})=>{
     return(
         <div
             css={css`
             margin-top: 12pt;
             margin-bottom: 12pt;
             animation: ${bounce} 0.8s ease infinite;
-            background-color; ${ColorPallete.secondary}
-            padding: 8pt;
+            color: ${color ? color : 'white'};
             `}>
             Loading
         </div>

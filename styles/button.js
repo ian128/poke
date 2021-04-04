@@ -10,12 +10,11 @@ const ButtonCss={
     margin-bottom: 8pt;
     border-radius: 4pt;
     cursor: pointer;
-    border: 1px solid #6A6A6AA0;
     margin-bottom: 8pt;
     animation: all 0.3s;
     outline: none;
     &:hover{
-      filter: brightness(1.2);
+      filter: brightness(1.1);
     }
     &:disabled{
       pointer-events: none;
@@ -37,6 +36,10 @@ const ButtonCss={
   danger: css`
     color:white;
     background-color: ${ColorPallete.danger};
+  `,
+  info: css`
+    color:white;
+    background-color: ${ColorPallete.info};
   `,
   gray: css`
     color:black;
