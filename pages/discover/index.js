@@ -10,6 +10,7 @@ import { useQuery } from "@apollo/client";
 import { GET_POKEMONS } from '../../schema/pokemon.schema';
 import { LoadingSpinner } from '../../components/loading.component';
 import { ScreenBreakpoints } from '../../styles/screenBreakpoint';
+import {PokemonStorageService} from '../../service/pokemon-storage.service';
 
 const Pokemons=(props)=>{
     const [page, setPage]=useState(1)
@@ -94,14 +95,25 @@ const PokemonCardCss=css`
     position: relative;
     flex-basis: 40%;
     cursor: pointer;
+    min-height: 64pt;
     .header{
         min-height: 32pt;
+        margin: 0;
+        width: calc(100% - 64pt);
+        .title{
+            margin-top: 0;
+            margin-bottom: 4pt;
+        }
+        .in-inventory{
+            line-height: 1.0;
+            font-size: 10pt;
+        }
     }
     .image{
         position: absolute;
-        top: 0;
+        top: 4pt;
         right: 0;
-        height: 64pt;
+        height: 54pt;
     }
 
     .utility{
@@ -120,16 +132,23 @@ const PokemonCardCss=css`
 `
 
 const PokemonCard=React.forwardRef((props, ref) => {
+    const ps = new PokemonStorageService()
     const {pokemonData} = props 
+    const [caughtList, setCaughList] = useState([]) 
+
     useEffect(()=>{
         console.log(pokemonData)
+        setCaughList(ps.getSavedPokemonsByID(pokemonData.id))
     }, [pokemonData])
     return (
         <Link 
         href={`/discover/detail/${pokemonData.name}`}>
             <div css={ [PokemonCardCss]}>
                 <div className="header">
-                    <h2 css={css`margin-bottom: 0`}>{pokemonData.name}</h2>
+                    <h2 className="title">{pokemonData.name}</h2>
+                    {
+                        caughtList.length ? <label className="in-inventory">You have {caughtList.length} in your pokemons</label> : ''
+                    }
                 </div>
                 {
                     pokemonData ? <img className="image" src={pokemonData.image}></img> : ''

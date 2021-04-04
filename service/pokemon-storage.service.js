@@ -11,6 +11,11 @@ export class PokemonStorageService{
         ls.set(this.#key, data)
     }
 
+    getSavedPokemonsByID(pokemon_id){
+        let state = this.getSavedPokemons()
+        return state.filter(item => item.pokemon_id == pokemon_id)
+    }
+
     removeSavedPokemons(nickname){
         let state = this.getSavedPokemons()
         state = state.filter(item => item.nickname !== nickname)

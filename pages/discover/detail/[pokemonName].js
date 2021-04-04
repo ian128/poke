@@ -97,7 +97,7 @@ const Detail=()=>{
 
     const catchPokemons=()=>{
         let probability = Math.random()
-        if(probability >= 0.5){
+        if(probability >= 0.50){
             console.log("Catch success!")
             setCatchModal(true)
         }else{
