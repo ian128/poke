@@ -1,12 +1,13 @@
 import { css } from '@emotion/react'
 import { ColorPallete } from './colors'
+import Enum from './enum'
 
 export const PillCSS={
     pill: css`
-        padding: 4pt 8pt 4pt 8pt;
-        border-radius: 16pt;
-        margin-right: 4pt;
-        margin-bottom: 4pt;
+        padding: ${Enum.xs} ${Enum.sm} ${Enum.xs} ${Enum.sm};
+        border-radius: ${Enum.lg};
+        margin-right: ${Enum.xs};
+        margin-bottom: ${Enum.xs};
     `,
     primary: css`
         background: ${ColorPallete.primary};

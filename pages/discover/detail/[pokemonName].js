@@ -13,6 +13,7 @@ import { PokemonStorageService } from '../../../service/pokemon-storage.service'
 import SeeMore from '../../../components/see-more.component';
 import { CenterContainerCss, ContainerCss, FlexContainerCss } from '../../../styles/container';
 import { PillCSS } from '../../../styles/pill';
+import ButtonCss from '../../../styles/button';
 
 const bounceKeyframe = keyframes`
   from, 20%, 53%, 80%, to {
@@ -121,17 +122,17 @@ const Detail=()=>{
         <div css={[ContainerCss]}>
             <Modal
             show={catchModal}>
-                <h3>You've caught this pokemon!</h3>
+                <h3>You have caught this pokemon!</h3>
                 <label>Let's give it a nice nickname</label>
                 <div>
                     <input value={form.name}
                     placeholder="Type nickname here..."
                     onChange={onChangeNickname}></input>
                 </div>
-                <button className="secondary" onClick={closeCatchModalHandler}>
+                <button css={[ButtonCss.btn, ButtonCss.gray]} onClick={closeCatchModalHandler}>
                     Never mind, release it
                 </button>
-                <button className="primary" disabled={!form.name}
+                <button css={[ButtonCss.btn, ButtonCss.primary]} disabled={!form.name}
                 onClick={submitPokemon}>Save it!</button>
             </Modal>
             <Toast theme={toast.theme}

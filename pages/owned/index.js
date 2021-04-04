@@ -12,6 +12,7 @@ import ButtonCss from '../../styles/button';
 import Modal from '../../components/modal.component';
 import Toast from '../../components/toast.component';
 import Link from 'next/link'
+import { CardCSS } from '../../styles/cards';
 
 const OwnedPokemons=()=>{
     const ps = new PokemonStorageService()
@@ -52,7 +53,7 @@ const OwnedPokemons=()=>{
             </Toast>
             <Modal show={releaseModal.open}>
                 <h3>Do you want to release pokemon with nickname {releaseModal.nickname}?</h3>
-                <button css={[ButtonCss.btn, ButtonCss.primary]}
+                <button css={[ButtonCss.btn]}
                 onClick={closeReleasePokemon}>
                         No
                 </button>
@@ -86,14 +87,9 @@ const OwnedPokemons=()=>{
     )
 }
 
-const PokemonCard=css`
-    margin: 4pt;
-    padding: 8pt;
-    text-align: left;
-    text-decoration: none;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    position: relative;
+const PokemonCard=[
+    CardCSS,
+    css`
     flex-basis: 40%;
     .header{
         min-height: 32pt;
@@ -119,6 +115,7 @@ const PokemonCard=css`
         }
     }
 `
+]
 
 const MyPokemonCard=({savedData, releaseHandler})=>{
 

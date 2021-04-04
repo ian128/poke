@@ -10,6 +10,7 @@ import { GET_POKEMONS } from '../../schema/pokemon.schema';
 import { LoadingSpinner } from '../../components/loading.component';
 import {PokemonStorageService} from '../../service/pokemon-storage.service';
 import GridCSS from "../../styles/grid";
+import { CardCSS } from "../../styles/cards";
 
 const Pokemons=(props)=>{
     const [page, setPage]=useState(1)
@@ -66,14 +67,9 @@ const Pokemons=(props)=>{
 export default Pokemons
 
 
-const PokemonCardCss=css`
-    margin: 4pt;
-    padding: 8pt;
-    text-align: left;
-    text-decoration: none;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    position: relative;
+const PokemonCardCss=[
+    CardCSS,
+    css`
     flex-basis: 40%;
     cursor: pointer;
     min-height: 64pt;
@@ -110,7 +106,7 @@ const PokemonCardCss=css`
             flex: 1;
         }
     }
-`
+`]
 
 const PokemonCard=React.forwardRef((props, ref) => {
     const ps = new PokemonStorageService()
