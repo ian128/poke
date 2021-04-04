@@ -141,10 +141,17 @@ const Detail=()=>{
                 <h5>{toast.message}</h5>
             </Toast>
             {
-                loading ? <LoadingSpinner></LoadingSpinner>: ''
+                loading ?
+                <div css={CenterContainerCss}>
+                    <LoadingSpinner></LoadingSpinner>
+                </div>: ''
             }
             {
-                error ? <ErrorComponent title="Sorry!" message="There is error(s) while gathering the data. Please try again"></ErrorComponent>: ''
+                error ? 
+                <div css={CenterContainerCss}>
+                    <ErrorComponent title="Sorry!" message="There is error(s) while gathering the data. Please try again"></ErrorComponent>
+                </div>
+                : ''
             }
             {
                 data ?
@@ -185,9 +192,13 @@ const Detail=()=>{
                             Catch!
                         </button>
                     </div>
-                    : <ErrorComponent
-                    title="Uh Oh!"
-                    message="We can't find pokemon what you are looking for"></ErrorComponent>
+                    :
+                    <div css={CenterContainerCss}>
+                        <ErrorComponent
+                            title="Uh Oh!"
+                            message="We can't find pokemon what you are looking for">     
+                        </ErrorComponent>
+                    </div>
                 :''
             }
         </div>

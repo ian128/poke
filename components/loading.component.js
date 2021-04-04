@@ -21,8 +21,8 @@ export function LoadingSpinner(){
     return(
         <div
             className={css`
-            margin-top: 8pt;
-            margin-bottom: 8pt;
+            margin-top: 12pt;
+            margin-bottom: 12pt;
             animation: ${bounce} 0.8s ease infinite;
             `}>
             Loading
