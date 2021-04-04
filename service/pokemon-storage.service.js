@@ -3,6 +3,14 @@ import ls from 'local-storage'
 export class PokemonStorageService{
     #key = "pokemonStorageKey"
 
+    getCaughtPokemonTypes(){
+        let state = this.getSavedPokemons()
+        let testArr = state.map(i => i.pokemon_id)
+        console.log(testArr)
+        let set = new Set(testArr)
+        return [...set]
+    }
+
     getSavedPokemons(){
         return ls.get(this.#key) || []
     }

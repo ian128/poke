@@ -65,9 +65,15 @@ const Toast =({show, theme, timeout, closeHandler, children})=>{
         }
     },[show])
    
+    const dismiss=()=>{
+        timeoutFn ? clearTimeout(timeoutFn): null
+        closeHandler()
+    }
+
     return (
         <div css={[toastWrapper, show ? '': css`display: none`]}>
-            <div css={[toast, theme ? toastTheme[theme] : '']}>
+            <div css={[toast, theme ? toastTheme[theme] : '', css`cursor: pointer`]}
+                onClick={dismiss}>
                 <div>
                     {children}
                 </div>

@@ -11,11 +11,14 @@ import { LoadingSpinner } from '../../components/loading.component';
 import {PokemonStorageService} from '../../service/pokemon-storage.service';
 import GridCSS from "../../styles/grid";
 import { CardCSS } from "../../styles/cards";
-import { CenterContainerCss, ContainerCss, ContainerFluidCss } from "../../styles/container";
+import { CenterContainerCss, ContainerFluidCss } from "../../styles/container";
 import ButtonCss from "../../styles/button";
 import Header from "../../components/header.component";
+import Footer, { FooterSpacer } from "../../components/footer.component";
 
 const Pokemons=(props)=>{
+    const ps = new PokemonStorageService()
+
     const [page, setPage]=useState(1)
     const [list, setList]=useState([])
     
@@ -34,6 +37,7 @@ const Pokemons=(props)=>{
     },[page])
 
     useEffect(()=>{
+        console.log(data)
         if(data){
             let {results} = data.pokemons
             setList(list => list.concat(results))
@@ -61,15 +65,26 @@ const Pokemons=(props)=>{
                 <LoadingSpinner color="black"></LoadingSpinner>
                 </div> : ''
             }
+        </div>
+        <div css={[CenterContainerCss]}>
             <button
-            css={[ButtonCss.primary]}
-             onClick={()=>{
-                    setPage(page+1)
-                }
-                }>
-                Load More
+                css={[ButtonCss.primary]}
+                onClick={()=>{
+                        setPage(page+1)
+                    }
+                    }>
+                    Load More
             </button>
         </div>
+        {
+            data ? 
+            <>
+                <FooterSpacer></FooterSpacer>
+                <Footer>
+                    <div css={[css`color: white`]}>You own {ps.getCaughtPokemonTypes().length} out of {data.pokemons.count} Pokémons</div>
+                </Footer>   
+            </>:''
+        }
         </>
     )
 }
@@ -102,20 +117,6 @@ const PokemonCardCss=[
         right: 0;
         height: 54pt;
     }
-
-    .utility{
-        margin-top: 8pt;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        .time{
-            flex: 1;
-        }
-        .option{
-            text-align: right;
-            flex: 1;
-        }
-    }
 `]
 
 const PokemonCard=React.forwardRef((props, ref) => {
@@ -124,7 +125,6 @@ const PokemonCard=React.forwardRef((props, ref) => {
     const [caughtList, setCaughList] = useState([]) 
 
     useEffect(()=>{
-        console.log(pokemonData)
         setCaughList(ps.getSavedPokemonsByID(pokemonData.id))
     }, [pokemonData])
     return (

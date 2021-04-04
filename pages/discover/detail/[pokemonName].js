@@ -80,7 +80,7 @@ const Detail=()=>{
             setToast({
                 shown: true, 
                 message: `Nice nickname! Pokemon with nickname '${form.name}' has been saved successfully!`,
-                theme: 'primary'
+                theme: 'success'
             })
         }
     }
@@ -152,7 +152,8 @@ const Detail=()=>{
             {
                 error ? 
                 <div css={CenterContainerCss}>
-                    <ErrorComponent title="Sorry!" message="There is error(s) while gathering the data. Please try again"></ErrorComponent>
+                    <ErrorComponent title="Sorry!"
+                    message="There is error(s) while gathering the data. Please try again"></ErrorComponent>
                 </div>
                 : ''
             }

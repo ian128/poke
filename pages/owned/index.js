@@ -110,6 +110,7 @@ const PokemonCard=[
         align-items: center;
         .time{
             flex: 1;
+            font-size: 10pt;
         }
         .option{
             text-align: right;
@@ -141,7 +142,7 @@ const MyPokemonCard=({savedData, releaseHandler})=>{
             </div>
             <div className="utility">
                 <div className="time">
-                    Caught on {savedData.caughtOn}
+                    Caught on {generateDate(savedData.caughtOn)}
                 </div>
                 <div className="option">
                     <button css={[ButtonCss.btn, ButtonCss.primary]}
@@ -158,3 +159,11 @@ const MyPokemonCard=({savedData, releaseHandler})=>{
 }
 
 export default OwnedPokemons
+
+
+const generateDate=(dateStr)=>{
+    let mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Okt','Nov','Dec']
+    let date = new Date(dateStr)
+    
+    return `${date.getDate()} ${mon[date.getMonth()]} ${date.getFullYear()}, ${date.getHours().toString().padStart(2,'0')}:${date.getMinutes().toString().padStart(2,'0')}`
+}

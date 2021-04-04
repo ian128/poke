@@ -7,8 +7,11 @@ import GridCSS from '../styles/grid'
 import { useRouter } from 'next/router'
 
 const HeaderCss=css`    
+    position: fixed;
+    width: 100%;
     background-color: ${ColorPallete.primary};
     padding: ${Enum.lg};
+    height: 48pt;
     .title{
         color: white;
         font-size:${Enum.lg};
@@ -21,20 +24,23 @@ const HeaderCss=css`
             cursor: pointer;
         }
     }
+    z-index: 1;
 `
 const Header=({name})=>{
     const router = useRouter()
     console.log(router)
     return (
-    <div css={[HeaderCss]}>
-        <div css={[GridCSS, css`justify-content: start;`]}>
-            <div className="title">
-                <span className="arrow"
-                onClick={() => router.back()}>&#8592;</span>
-                {name}
+        <div css={[css`height: 48pt`]}>
+              <div css={[HeaderCss, css`position; relative`]}>
+                <div css={[GridCSS, css`justify-content: start;`]}>
+                    <div className="title">
+                        <span className="arrow"
+                        onClick={() => router.back()}>&#8592;</span>
+                        {name}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
     )
 }
 

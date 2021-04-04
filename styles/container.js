@@ -2,6 +2,7 @@
 /* @jsx jsx */
 import { css } from '@emotion/react';
 import { ColorPallete } from './colors';
+import Enum from './enum';
 import { ScreenBreakpoints } from './screenBreakpoint';
 
 export const CurvedCss= css`
@@ -33,6 +34,8 @@ export const CurvedCss= css`
     }
 `
 export const ContainerFluidCss=css`
+    margin-top: ${Enum.md};
+    margin-bottom: ${Enum.md};
     min-height: 50vh;
     padding: 0 0.5rem;
     display: flex;
