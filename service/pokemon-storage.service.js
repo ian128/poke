@@ -6,7 +6,6 @@ export class PokemonStorageService{
     getCaughtPokemonTypes(){
         let state = this.getSavedPokemons()
         let testArr = state.map(i => i.pokemon_id)
-        console.log(testArr)
         let set = new Set(testArr)
         return [...set]
     }
@@ -42,7 +41,6 @@ export class PokemonStorageService{
     }
 
     addSavedPokemons(pokemon_id, pokemon_name, nickname){
-        console.log(pokemon_id, nickname)
         let state = this.getSavedPokemons()
         state.push({
             pokemon_id: pokemon_id,

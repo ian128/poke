@@ -37,7 +37,6 @@ const Pokemons=(props)=>{
     },[page])
 
     useEffect(()=>{
-        console.log(data)
         if(data){
             let {results} = data.pokemons
             setList(list => list.concat(results))

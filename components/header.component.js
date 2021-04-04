@@ -28,7 +28,6 @@ const HeaderCss=css`
 `
 const Header=({name})=>{
     const router = useRouter()
-    console.log(router)
     return (
         <div css={[css`height: 48pt`]}>
               <div css={[HeaderCss, css`position; relative`]}>
@@ -36,7 +35,9 @@ const Header=({name})=>{
                     <div className="title">
                         <span className="arrow"
                         onClick={() => router.back()}>&#8592;</span>
-                        {name}
+                        <span className="title-content">
+                            {name}
+                        </span>
                     </div>
                 </div>
             </div>

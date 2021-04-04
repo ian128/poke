@@ -14,17 +14,20 @@ const SeeMore =({minHeight, children})=>{
 
     return (
         <div css={css`margin-bottom: 8pt;`}>
-            <div css={[SeeMoreCSSContainer, 
+            <div 
+            className="content"
+            css={[SeeMoreCSSContainer, 
             expand? 
             css`height: fit-content;` : css`height: ${minHeight}; overflow-y: hidden`
             ]}>
                 {children}
             </div>
-            <div
+            <a
+            className="toggle-button"
             css={css`margin-bottom: 8pt; cursor: pointer; color: ${ColorPallete.secondary}`} 
             onClick={()=> setExpand(!expand)}>
                 {expand ? 'See Less': 'See More'}
-            </div>
+            </a>
         </div>
     )
 }

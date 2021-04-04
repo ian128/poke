@@ -131,9 +131,6 @@ const MyPokemonCard=({savedData, releaseHandler})=>{
         }
     )
 
-    useEffect(()=>{
-        console.log(data)
-    }, [data])
     return (
         <div css={ [PokemonCard]}>
             <div className="header">

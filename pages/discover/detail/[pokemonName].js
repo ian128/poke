@@ -64,7 +64,6 @@ const Detail=()=>{
     }
 
     const submitPokemon=()=>{
-        console.log("HAHAHAHA")
         if(ps.isPokemonNicknameExists(data.pokemon.id, form.name)){
             setToast(
                 {message:`Pokemon with nickname "${form.name}" is exists in this pokemon type! please choose other nickname`,

@@ -17,7 +17,7 @@ const FooterCss=css`
 const Footer=({children})=>{
     return (
         <div css={[FooterCss]}>
-            <div css={[GridCSS]}>
+            <div css={[GridCSS]} className="content">
                 {children}
             </div>
         </div>
