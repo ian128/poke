@@ -13,7 +13,8 @@ import Modal from '../../components/modal.component';
 import Toast from '../../components/toast.component';
 import Link from 'next/link'
 import { CardCSS } from '../../styles/cards';
-import { ContainerCss, ContainerFluidCss } from '../../styles/container';
+import { ContainerFluidCss } from '../../styles/container';
+import Header from '../../components/header.component';
 
 const OwnedPokemons=()=>{
     const ps = new PokemonStorageService()
@@ -45,6 +46,8 @@ const OwnedPokemons=()=>{
     }
 
     return (
+        <>
+        <Header name="Your Pokémons"></Header>
         <div css={[ContainerFluidCss]}>
             <Toast theme={toast.theme}
             show={toast.shown}
@@ -63,9 +66,7 @@ const OwnedPokemons=()=>{
                         Yes, Release
                 </button>
             </Modal>
-            <h4>Your Pokémons</h4>
-            <div css={[GridCSS]}>
-                    <div css={GridCSS}>
+            <div css={GridCSS}>
                         {
                         list.length ?
                         list.map(item=>{
@@ -84,7 +85,7 @@ const OwnedPokemons=()=>{
                         }
                     </div>
             </div>
-        </div>
+        </>
     )
 }
 

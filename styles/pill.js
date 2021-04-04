@@ -13,8 +13,24 @@ export const PillCSS={
         background: ${ColorPallete.primary};
         color: white;
     `,
+    secondary: css`
+        background: ${ColorPallete.secondary};
+        color: white;
+    `,
+    success: css`
+        background: ${ColorPallete.success};
+        color: white;
+    `,
     danger: css`
         background: ${ColorPallete.danger};
+        color: white;
+    `,
+    info: css`
+        background: ${ColorPallete.info};
+        color: white;
+    `,
+    gray: css`
+        background: ${ColorPallete.gray};
         color: white;
     `
 }

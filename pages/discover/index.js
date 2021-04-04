@@ -12,6 +12,8 @@ import {PokemonStorageService} from '../../service/pokemon-storage.service';
 import GridCSS from "../../styles/grid";
 import { CardCSS } from "../../styles/cards";
 import { CenterContainerCss, ContainerCss, ContainerFluidCss } from "../../styles/container";
+import ButtonCss from "../../styles/button";
+import Header from "../../components/header.component";
 
 const Pokemons=(props)=>{
     const [page, setPage]=useState(1)
@@ -39,8 +41,9 @@ const Pokemons=(props)=>{
     },[data])
 
     return (
+        <>
+        <Header name="Discover Pokémons"></Header>
         <div css={[ContainerFluidCss]}>
-            <h4>Discover Pokémons</h4>
             <div css={[GridCSS]}>
                 {
                     list.map(item =>{
@@ -58,13 +61,16 @@ const Pokemons=(props)=>{
                 <LoadingSpinner color="black"></LoadingSpinner>
                 </div> : ''
             }
-            <button onClick={()=>{
+            <button
+            css={[ButtonCss.primary]}
+             onClick={()=>{
                     setPage(page+1)
                 }
                 }>
                 Load More
             </button>
         </div>
+        </>
     )
 }
 

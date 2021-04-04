@@ -14,6 +14,7 @@ import SeeMore from '../../../components/see-more.component';
 import { CenterContainerCss, ContainerCss, FlexContainerCss, CurvedCss} from '../../../styles/container';
 import { PillCSS } from '../../../styles/pill';
 import ButtonCss from '../../../styles/button';
+import Header from '../../../components/header.component';
 
 const bounceKeyframe = keyframes`
   from, 20%, 53%, 80%, to {
@@ -118,7 +119,7 @@ const Detail=()=>{
 
     return (
         <>
-        <h4 css={css`text-align: center`}>Pokémon Details</h4>
+        <Header name="Pokémon Details"></Header>
         <div css={[CurvedCss]}></div>
         <div css={[ContainerCss, css`margin-top: -84pt`]}>
             <Modal
@@ -171,7 +172,7 @@ const Detail=()=>{
                                 <div css={FlexContainerCss}>
                                 {
                                     data.pokemon.moves.map((item, index)=>{
-                                        return <div key={index} css={[PillCSS.pill, PillCSS.primary]}>{item.move.name}</div>
+                                        return <div key={index} css={[PillCSS.pill, PillCSS.info]}>{item.move.name}</div>
                                     })
                                 }      
                                 </div>           
@@ -184,13 +185,15 @@ const Detail=()=>{
                                 <div css={FlexContainerCss}>
                                 {
                                     data.pokemon.types.map((item, index)=>{
-                                        return <div key={index} css={[PillCSS.pill, PillCSS.primary]}>{item.type.name}</div>
+                                        return <div key={index} css={[PillCSS.pill, PillCSS.info]}>{item.type.name}</div>
                                     })
                                 }      
                                 </div>           
                             </SeeMore>
                         </div>
-                        <button onClick={catchPokemons}>
+                        <button
+                        css={[ButtonCss.btn, ButtonCss.primary, css`padding: 12pt 32pt 12pt 32pt; width: 100%; font-size: 12pt`]}
+                        onClick={catchPokemons}>
                             Catch!
                         </button>
                     </div>

@@ -2,6 +2,7 @@
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react'
 import { useState } from "react"
+import { ColorPallete } from '../styles/colors'
 
 const SeeMoreCSSContainer= css`
     width: 100%;
@@ -20,7 +21,7 @@ const SeeMore =({minHeight, children})=>{
                 {children}
             </div>
             <div
-            css={css`margin-bottom: 8pt; cursor: pointer`} 
+            css={css`margin-bottom: 8pt; cursor: pointer; color: ${ColorPallete.secondary}`} 
             onClick={()=> setExpand(!expand)}>
                 {expand ? 'See Less': 'See More'}
             </div>
