@@ -6,10 +6,25 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Front</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <main className={styles.main}>
+        <h1>Main Menu</h1>
+        <Link href="/discover">
+          <button>
+            Discover Pokémons
+          </button>
+        </Link>
+        <Link href="/owned">
+          <button>
+            My Pokémons
+          </button>
+        </Link>
+      </main>
+
+      {/*
       <main className={styles.main}>
         <h1>Main Menu</h1>
         <Link href="/discover">
@@ -77,6 +92,7 @@ export default function Home() {
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
+    */}
     </div>
   )
 }
