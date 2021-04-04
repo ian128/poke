@@ -2,15 +2,14 @@
 /** @jsxRuntime classic /
 /* @jsx jsx */
 import Link from "next/link";
-import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react';
 import { jsx, css } from '@emotion/react'
 
 import { useQuery } from "@apollo/client";
 import { GET_POKEMONS } from '../../schema/pokemon.schema';
 import { LoadingSpinner } from '../../components/loading.component';
-import { ScreenBreakpoints } from '../../styles/screenBreakpoint';
 import {PokemonStorageService} from '../../service/pokemon-storage.service';
+import GridCSS from "../../styles/grid";
 
 const Pokemons=(props)=>{
     const [page, setPage]=useState(1)
@@ -40,7 +39,7 @@ const Pokemons=(props)=>{
     return (
         <div className="container">
             <h4>Discover Pokémons</h4>
-            <div css={PokemonCardGridCss}>
+            <div css={GridCSS}>
                 {
                     list.map(item =>{
                         return (
@@ -66,24 +65,6 @@ const Pokemons=(props)=>{
 
 export default Pokemons
 
-const PokemonCardGridCss=css`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 75%;    
-    ${ScreenBreakpoints.xs}{
-        width: 100%;
-        flex-direction: column;
-    }
-    ${ScreenBreakpoints.sm}{
-        width: 100%;
-        flex-direction: row;
-    }
-    ${ScreenBreakpoints.md}{
-        width: 75%;
-        flex-direction: row;
-    }
-`
 
 const PokemonCardCss=css`
     margin: 4pt;

@@ -1,5 +1,8 @@
 import { css } from '@emotion/react'
-export const ButtonStyle=css`
+import { ColorPallete } from './colors'
+
+const ButtonCss={
+  btn: css`
     padding: 8pt 8pt 8pt 8pt;
     margin-bottom: 8pt;
     border-radius: 4pt;
@@ -8,10 +11,6 @@ export const ButtonStyle=css`
     margin-bottom: 8pt;
     animation: all 0.3s;
     outline: none;
-    &.primary{
-      color: white;
-      background-color: $primary;
-    }
     &:hover{
       filter: brightness(1.2);
     }
@@ -19,4 +18,11 @@ export const ButtonStyle=css`
       pointer-events: none;
       filter: grayscale(0.8);
     }
-`
+  `,
+  primary: css`
+    color: white;
+    background-color: ${ColorPallete.primary};
+  `
+}
+
+export default ButtonCss

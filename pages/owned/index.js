@@ -1,15 +1,14 @@
 /** @jsxRuntime classic /
 /* @jsx jsx */
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { jsx, css } from '@emotion/react'
 import React, { useEffect } from 'react';
-
 import { useState } from "react"
+import GridCSS from '../../styles/grid';
+
 import { PokemonStorageService } from "../../service/pokemon-storage.service"
-import { GridStyles } from "../../styles/cards"
 import {GET_POKEMONS_DETAIL} from "../../schema/pokemon.schema";
-import {ScreenBreakpoints} from '../../styles/screenBreakpoint';
-import { ButtonStyle } from '../../styles/button';
+import ButtonCss from '../../styles/button';
 import Modal from '../../components/modal.component';
 import Toast from '../../components/toast.component';
 import Link from 'next/link'
@@ -53,18 +52,18 @@ const OwnedPokemons=()=>{
             </Toast>
             <Modal show={releaseModal.open}>
                 <h3>Do you want to release pokemon with nickname {releaseModal.nickname}?</h3>
-                <button css={ButtonStyle}
+                <button css={[ButtonCss.btn, ButtonCss.primary]}
                 onClick={closeReleasePokemon}>
                         No
                 </button>
-                <button css={ButtonStyle}
+                <button css={[ButtonCss.btn, ButtonCss.primary]}
                 onClick={releasePokemon}>
                         Yes, Release
                 </button>
             </Modal>
             <div className="container">
                     <h4>Your Pokémons</h4>
-                    <div css={PokemonCardGrid}>
+                    <div css={GridCSS}>
                         {
                         list.length ?
                         list.map(item=>{
@@ -86,25 +85,6 @@ const OwnedPokemons=()=>{
         </>
     )
 }
-
-const PokemonCardGrid=css`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 75%;    
-    ${ScreenBreakpoints.xs}{
-        width: 100%;
-        flex-direction: column;
-    }
-    ${ScreenBreakpoints.sm}{
-        width: 100%;
-        flex-direction: row;
-    }
-    ${ScreenBreakpoints.md}{
-        width: 75%;
-        flex-direction: row;
-    }
-`
 
 const PokemonCard=css`
     margin: 4pt;
@@ -165,7 +145,7 @@ const MyPokemonCard=({savedData, releaseHandler})=>{
                     Caught on {savedData.caughtOn}
                 </div>
                 <div className="option">
-                    <button css={ButtonStyle}
+                    <button css={[ButtonCss.btn, ButtonCss.primary]}
                     onClick={ ()=>{releaseHandler(savedData)} }>
                         Release
                     </button>
