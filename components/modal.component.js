@@ -4,10 +4,10 @@ import { jsx, css } from '@emotion/react'
 import { ScreenBreakpoints } from "../styles/screenBreakpoint";
 
 const modalWrapper=css`
-    position: absolute;
+    position: fixed;
     background: #6A6A6AA0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     z-index: 1;
     top: 0;
     left: 0;

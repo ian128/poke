@@ -7,7 +7,7 @@ import { ColorPallete } from "../styles/colors.js";
 import { useEffect } from 'react';
 
 const toastWrapper=css`
-    position: absolute;
+    position: fixed;
     height: fit-content;
     width: 100vw;
     z-index: 1;

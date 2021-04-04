@@ -1,3 +1,6 @@
+/** @jsxRuntime classic /
+/* @jsx jsx */
+import { jsx, css, keyframes } from '@emotion/react'
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
@@ -5,9 +8,11 @@ import { LoadingSpinner } from '../../../components/loading.component'
 import { GET_POKEMONS_DETAIL } from '../../../schema/pokemon.schema'
 import { ErrorComponent } from '../../../components/error.component';
 import Modal from '../../../components/modal.component';
-import { css, keyframes } from '@emotion/css'
 import Toast from '../../../components/toast.component';
 import { PokemonStorageService } from '../../../service/pokemon-storage.service';
+import SeeMore from '../../../components/see-more.component';
+import { CenterContainerCss, ContainerCss, FlexContainerCss } from '../../../styles/container';
+import { PillCSS } from '../../../styles/pill';
 
 const bounceKeyframe = keyframes`
   from, 20%, 53%, 80%, to {
@@ -111,8 +116,9 @@ const Detail=()=>{
     }
 
     return (
-        <div className="container">
-            <h4>Pokémon Details</h4>
+        <>
+        <h4 css={css`text-align: center`}>Pokémon Details</h4>
+        <div css={[ContainerCss]}>
             <Modal
             show={catchModal}>
                 <h3>You've caught this pokemon!</h3>
@@ -144,9 +150,37 @@ const Detail=()=>{
                 data ?
                     data.pokemon.id ?
                     <div>
-                        <img src={data.pokemon.sprites.front_default}
-                        className={[bounceSprite]}/>
+                        <div css={CenterContainerCss}>
+                            <img src={data.pokemon.sprites.front_default}
+                            css={[bounceSprite]}/>
+                        </div>
                         <h3 className="text-center">{data.pokemon.name}</h3>
+                        <div>
+                            <h3>Moves</h3>
+                            <SeeMore
+                            minHeight="3em">
+                                <div css={FlexContainerCss}>
+                                {
+                                    data.pokemon.moves.map(item=>{
+                                        return <div css={[PillCSS.pill, PillCSS.primary]}>{item.move.name}</div>
+                                    })
+                                }      
+                                </div>           
+                            </SeeMore>
+                        </div>
+                        <div>
+                            <h3>Types</h3>
+                            <SeeMore
+                            minHeight="3em">
+                                <div css={FlexContainerCss}>
+                                {
+                                    data.pokemon.types.map(item=>{
+                                        return <div css={[PillCSS.pill, PillCSS.primary]}>{item.type.name}</div>
+                                    })
+                                }      
+                                </div>           
+                            </SeeMore>
+                        </div>
                         <button onClick={catchPokemons}>
                             Catch!
                         </button>
@@ -157,6 +191,7 @@ const Detail=()=>{
                 :''
             }
         </div>
+        </>
     )
 }
 

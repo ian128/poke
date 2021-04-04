@@ -3,44 +3,29 @@
 import { jsx, css } from '@emotion/react'
 import { useState } from "react"
 
-const modal=SeeMoreCSS`
-    
-    flex: 0 1 1;
-    margin: auto auto auto auto;
-    background-color: #FFFFFF;
-    border-radius: 4pt;
-    padding: 4pt 12pt 4pt 12pt;
+const SeeMoreCSSContainer= css`
     width: 100%;
-    ${ScreenBreakpoints.sm}{
-        width: 100%
-    }
-    ${ScreenBreakpoints.md}{
-        width: 75%
-    }
-    ${ScreenBreakpoints.lg}{
-        width: 50%
-    }
+    margin-bottom: 4pt;
 `
 
-
-const SeeMore =({children})=>{
+const SeeMore =({minHeight, children})=>{
     const [expand, setExpand] = useState(false)
 
     return (
-        <div css={[modalWrapper, show ? '': css`display: none`]}>
-            <div css={modal}>
-                <div>
-                    {children}
-                </div>
-                {closeHandler ? 
-                <div>
-                    <button onClick={closeHandler}>
-                        Dismiss
-                    </button>
-                </div> : ''}
+        <div css={css`margin-bottom: 8pt;`}>
+            <div css={[SeeMoreCSSContainer, 
+            expand? 
+            css`height: fit-content;` : css`height: ${minHeight}; overflow-y: hidden`
+            ]}>
+                {children}
+            </div>
+            <div
+            css={css`margin-bottom: 8pt; cursor: pointer`} 
+            onClick={()=> setExpand(!expand)}>
+                {expand ? 'See Less': 'See More'}
             </div>
         </div>
     )
 }
 
-export default Modal
+export default SeeMore
