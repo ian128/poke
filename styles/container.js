@@ -32,12 +32,15 @@ export const CurvedCss= css`
         border-bottom-right-radius: 50% 40%;
     }
 `
-
-export const ContainerCss=css`
-    min-height: 100vh;
+export const ContainerFluidCss=css`
+    min-height: 50vh;
     padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
+`
+
+export const ContainerCss=css`
+    ${ContainerFluidCss}
     margin-left: auto;
     margin-right: auto;
     ${ScreenBreakpoints.xs}{

@@ -1,16 +1,21 @@
+/** @jsxRuntime classic /
+/* @jsx jsx */
+import { jsx, css } from '@emotion/react'
+
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { CenterContainerCss, ContainerCss, ContainerFluidCss} from '../styles/container'
+import GridCSS from '../styles/grid'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div css={[ContainerCss]}>
       <Head>
         <title>Front</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main css={[ContainerFluidCss]}>
         <h1>Main Menu</h1>
         <Link href="/discover">
           <button>

@@ -5,6 +5,8 @@ const GridCSS=css`
     justify-content: center;
     flex-wrap: wrap;
     width: 75%;    
+    margin-left: auto;
+    margin-right: auto;
     ${ScreenBreakpoints.xs}{
         width: 100%;
         flex-direction: column;

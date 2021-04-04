@@ -11,6 +11,7 @@ import { LoadingSpinner } from '../../components/loading.component';
 import {PokemonStorageService} from '../../service/pokemon-storage.service';
 import GridCSS from "../../styles/grid";
 import { CardCSS } from "../../styles/cards";
+import { CenterContainerCss, ContainerCss, ContainerFluidCss } from "../../styles/container";
 
 const Pokemons=(props)=>{
     const [page, setPage]=useState(1)
@@ -38,9 +39,9 @@ const Pokemons=(props)=>{
     },[data])
 
     return (
-        <div className="container">
+        <div css={[ContainerFluidCss]}>
             <h4>Discover Pokémons</h4>
-            <div css={GridCSS}>
+            <div css={[GridCSS]}>
                 {
                     list.map(item =>{
                         return (
@@ -52,12 +53,15 @@ const Pokemons=(props)=>{
                 }
             </div>
             {
-                loading ? <LoadingSpinner></LoadingSpinner>: ''
+                loading ?
+                <div css={CenterContainerCss}>
+                <LoadingSpinner color="black"></LoadingSpinner>
+                </div> : ''
             }
             <button onClick={()=>{
                     setPage(page+1)
                 }
-            }>
+                }>
                 Load More
             </button>
         </div>
