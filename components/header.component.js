@@ -26,7 +26,7 @@ const HeaderCss=css`
     }
     z-index: 1;
 `
-const Header=({name})=>{
+const Header=({name, previousUrl})=>{
     const router = useRouter()
     return (
         <div css={[css`height: 48pt`]}>
@@ -34,7 +34,7 @@ const Header=({name})=>{
                 <div css={[GridCSS, css`justify-content: start;`]}>
                     <div className="title">
                         <span className="arrow"
-                        onClick={() => router.back()}>&#8592;</span>
+                        onClick={() => previousUrl ? router.push(previousUrl) :router.back()}>&#8592;</span>
                         <span className="title-content">
                             {name}
                         </span>

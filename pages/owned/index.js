@@ -53,7 +53,7 @@ const OwnedPokemons=()=>{
          <Head>
             <title>Your Pokémons</title>
         </Head>
-        <Header name="Your Pokémons"></Header>
+        <Header name="Your Pokémons" previousUrl="/"></Header>
         <div css={[ContainerFluidCss]}>
             <Toast theme={toast.theme}
             show={toast.shown}

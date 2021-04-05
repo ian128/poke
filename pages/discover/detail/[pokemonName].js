@@ -148,8 +148,9 @@ const Detail=()=>{
         <>
         <Head>
             <title>Pokémon Detail</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
         </Head>
-        <Header name="Pokémon Details"></Header>
+        <Header name="Pokémon Details" previousUrl="/discover"></Header>
         
         <Modal show={catchAnimationModal}>
             <div css={pokeballAnimationContainer}>

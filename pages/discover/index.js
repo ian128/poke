@@ -54,7 +54,7 @@ const Pokemons=(props)=>{
         <Head>
             <title>Discover Pokémons</title>
         </Head>
-        <Header name="Discover Pokémons"></Header>
+        <Header name="Discover Pokémons" previousUrl="/"></Header>
         {
             error ?  <div css={CenterContainerCss}>
             <ErrorComponent title="Sorry!"
@@ -111,7 +111,7 @@ const PokemonCardCss=[
     css`
     flex-basis: 40%;
     cursor: pointer;
-    min-height: 64pt;
+    min-height: 56pt;
     .header{
         min-height: 32pt;
         margin: 0;
@@ -150,7 +150,7 @@ const PokemonCard=({pokemonData}) => {
         href={`/discover/detail/${pokemonData.name}`}>
             <div css={ [PokemonCardCss]}>
                 <div className="header">
-                    <h2 className="title">{convertToStartCase(pokemonData.name)}</h2>
+                    <h3 className="title">{convertToStartCase(pokemonData.name)}</h3>
                     {
                         caughtList.length ? <label className="in-inventory">You have {caughtList.length} in your pokemons</label> : ''
                     }
