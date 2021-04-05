@@ -58,6 +58,9 @@ const pokeballAnimationContainer=css`
     height: 100%;
     position: absolute
   }
+  .top.animate{
+    transform: rotate(180deg);
+  }
 `
 
 const Detail=()=>{
@@ -145,14 +148,16 @@ const Detail=()=>{
             <title>Pokémon Detail</title>
         </Head>
         <Header name="Pokémon Details"></Header>
+        
         {/*
          <Modal show={catchAnimationModal}>
             <div css={pokeballAnimationContainer}>
-                <img className="top" src="/assets/images/pokeball/pokeball_top.svg"></img>
+                <img className="top animate" src="/assets/images/pokeball/pokeball_top.svg"></img>
                 <img className="bottom" src="/assets/images/pokeball/pokeball.svg"></img>
             </div>
         </Modal>
         */}
+ 
 
         <Modal
             show={catchModal}>
