@@ -63,6 +63,8 @@ const Toast =({show, theme, timeout, closeHandler, children})=>{
                 closeHandler()
             }, timeout || 3000)
         }
+
+        return () => clearTimeout(timeoutFn)
     },[show])
    
     const dismiss=()=>{
