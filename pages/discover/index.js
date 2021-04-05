@@ -76,9 +76,7 @@ const Pokemons=(props)=>{
                 <div css={[CenterContainerCss]}>
                     {
                         loading ?
-                        <div css={CenterContainerCss}>
-                        <LoadingSpinner color="black"></LoadingSpinner>
-                        </div> : 
+                        <LoadingSpinner></LoadingSpinner> : 
                         <button
                             css={[ButtonCss.btn, ButtonCss.primary]}
                             onClick={()=>{

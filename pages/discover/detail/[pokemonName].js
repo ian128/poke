@@ -192,7 +192,7 @@ const Detail=()=>{
             {
                 loading ?
                 <div css={CenterContainerCss}>
-                    <LoadingSpinner color="white"></LoadingSpinner>
+                    <LoadingSpinner></LoadingSpinner>
                 </div>: ''
             }
             {

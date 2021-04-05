@@ -5,8 +5,8 @@ import { jsx, css } from '@emotion/react'
 import Head from 'next/head'
 import Link from 'next/link'
 import ButtonCss from '../styles/button'
-import { CenterContainerCss, ContainerCss, ContainerFluidCss} from '../styles/container'
-import GridCSS from '../styles/grid'
+import {ContainerCss, ContainerFluidCss} from '../styles/container'
+import Enum from '../styles/enum'
 
 export default function Home() {
   return (
@@ -28,6 +28,9 @@ export default function Home() {
             My Pokémons
           </button>
         </Link>
+        <div css={css`margin-top: ${Enum.lg}`}>
+          <label>Created by Alessandro Ferdian, using API from PokeAPI (GraphQL version)</label>
+        </div>
       </main>
     </div>
   )
