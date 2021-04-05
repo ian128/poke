@@ -153,8 +153,8 @@ const Detail=()=>{
         
         <Modal show={catchAnimationModal}>
             <div css={pokeballAnimationContainer}>
-                <img className="top animate" src="/assets/images/pokeball/pokeball_top.svg"></img>
-                <img className="bottom" src="/assets/images/pokeball/pokeball.svg"></img>
+                <img alt="Pokeball top section" className="top animate" src="/assets/images/pokeball/pokeball_top.svg"></img>
+                <img alt="Pokeball bottom section" className="bottom" src="/assets/images/pokeball/pokeball.svg"></img>
             </div>
         </Modal>
 
@@ -209,7 +209,9 @@ const Detail=()=>{
                     data.pokemon.id ?
                     <div>
                         <div css={CenterContainerCss}>
-                            <img src={data.pokemon.sprites.front_default}
+                            <img
+                            alt={data.pokemon.name}
+                            src={data.pokemon.sprites.front_default}
                             css={[bounceSprite]}/>
                         </div>
                         <h1 css={css`text-align:center; margin-top: 0`}>{ convertToStartCase(data.pokemon.name) }</h1>

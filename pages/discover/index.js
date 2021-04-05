@@ -157,7 +157,9 @@ const PokemonCard=({pokemonData}) => {
                         caughtList.length ? <label className="in-inventory">You have {caughtList.length} in your pokemons</label> : ''
                     }
                 </div>
-                <img className="image" src={pokemonData.image}></img>
+                <img className="image" 
+                alt={pokemonData.name}
+                src={pokemonData.image}></img>
             </div>
         </Link> : ''
     )

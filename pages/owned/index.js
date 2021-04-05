@@ -158,7 +158,8 @@ const MyPokemonCard=({savedData, releaseHandler})=>{
                 </div>
             </div>
             {
-                data ? <img className="image" src={data.pokemon.sprites.front_default}></img> : ''
+                data ? <img className="image"
+                alt={savedData.pokemon_name} src={data.pokemon.sprites.front_default}></img> : ''
             }
         </div>
     )
