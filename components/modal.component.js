@@ -1,6 +1,7 @@
 /** @jsxRuntime classic /
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react'
+import { useEffect } from 'react';
 import { ScreenBreakpoints } from "../styles/screenBreakpoint";
 
 const modalWrapper=css`
@@ -38,6 +39,15 @@ const modal=css`
 `
 
 const Modal =({show, closeHandler, children})=>{
+    useEffect(()=>{
+        let res = document.getElementsByTagName('body')[0]
+        if(show){
+            res.style.overflowY="hidden"
+            console.log(res)
+        }else{
+            res.style.overflowY="auto"
+        }
+    },[show])
     return (
         <div css={[modalWrapper, show ? '': css`display: none`]}>
             <div css={modal}>
