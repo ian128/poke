@@ -52,14 +52,27 @@ const pokeballAnimationContainer=css`
   position: relative;
   .top{
     height: 100%;
-    position: absolute
+    position: absolute;
+    &.animate{
+        animation: close 1.0s cubic-bezier(.17,.67,.69,1.08) infinite;
+        transform-origin: 0 50%;
+        @keyframes close{
+            0%{
+                transform: rotate(-50deg);
+            }
+            50%{
+                transform: rotate(0);
+            }
+            100%{
+                transform: rotate(-50deg);
+            }
+        }
+    }
   }
   .bottom{
     height: 100%;
-    position: absolute
-  }
-  .top.animate{
-    transform: rotate(180deg);
+    position: absolute;
+    left:0;
   }
 `
 
@@ -76,13 +89,15 @@ const Detail=()=>{
         }
     )
 
-    const [catchAnimationModal, setAnimationModal] = useState(true) 
+    const [catchAnimationModal, setAnimationModal] = useState(false) 
+    const [catchFailModal, setCatchFailModal] = useState(false) 
     const [catchModal, setCatchModal] = useState(false) 
     const [toast, setToast] = useState({shown: false, message: '', theme: ''}) 
     const [form, setForm] = useState({name: ''}) 
 
     const closeCatchModalHandler=()=>{
         setCatchModal(false)
+        setForm({name: ''})
     }
 
     const closeToast=()=>{
@@ -100,8 +115,7 @@ const Detail=()=>{
             ps.addSavedPokemons(
                 data.pokemon.id, data.pokemon.name, form.name
             )
-            setCatchModal(false)
-            setForm({name: ''})
+            closeCatchModalHandler()
             setToast({
                 shown: true, 
                 message: `Nice nickname! Pokemon with nickname '${form.name}' has been saved successfully!`,
@@ -110,36 +124,24 @@ const Detail=()=>{
         }
     }
 
-    useEffect(()=>{
-        console.log(error)
-    },[error])
-
-    useEffect(()=>{
-        console.log(data)
-    },[data])
-
-    useEffect(()=>{
-        //when catch modal is not launch, empty the form
-        if(catchModal == false)   setForm({name: ''})
-    },[catchModal])
 
     const onChangeNickname=(event)=>{
         setForm({...form, name: event.target.value})
     }
 
     const catchPokemons=()=>{
-        let probability = Math.random()
-        if(probability >= 0.50){
-            console.log("Catch success!")
-            setCatchModal(true)
-        }else{
-            console.log("Catch fails!")
-            setToast({
-                message:'Oops! We cannot catch your pokemon this time. Please try again',
-                shown: true,
-                theme: 'danger'
-            })
-        }
+        setAnimationModal(true)
+        setTimeout(()=>{
+            let probability = Math.floor(Math.random() * 10)+1
+            if(probability >= 5){
+                console.log("Catch success!")
+                setCatchModal(true)
+            }else{
+                console.log("Catch fails!")
+                setCatchFailModal(true)
+            }
+            setAnimationModal(false)
+        },1000)
     }
 
     return (
@@ -149,15 +151,18 @@ const Detail=()=>{
         </Head>
         <Header name="Pokémon Details"></Header>
         
-        {/*
-         <Modal show={catchAnimationModal}>
+        <Modal show={catchAnimationModal}>
             <div css={pokeballAnimationContainer}>
                 <img className="top animate" src="/assets/images/pokeball/pokeball_top.svg"></img>
                 <img className="bottom" src="/assets/images/pokeball/pokeball.svg"></img>
             </div>
         </Modal>
-        */}
- 
+
+        <Modal show={catchFailModal}>
+            <h3>Oops, he/she has gone away!</h3>
+            <button css={[ButtonCss.btn, ButtonCss.primary]}
+                onClick={()=>{setCatchFailModal(false)}}> Dismiss</button>
+        </Modal>
 
         <Modal
             show={catchModal}>
@@ -194,6 +199,7 @@ const Detail=()=>{
                 error ? 
                 <div css={CenterContainerCss}>
                     <ErrorComponent title="Sorry!"
+                    color="white"
                     message="There is error(s) while gathering the data. Please try again"></ErrorComponent>
                 </div>
                 : ''

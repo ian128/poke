@@ -2,6 +2,7 @@
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react'
 import { useEffect } from 'react';
+import Enum from '../styles/enum';
 import { ScreenBreakpoints } from "../styles/screenBreakpoint";
 
 const modalWrapper=css`
@@ -13,7 +14,7 @@ const modalWrapper=css`
     top: 0;
     left: 0;
     overflow-y: auto;
-    padding: 8pt;
+    padding: ${Enum.md};
     display: flex;
     justify-content: center;
 `
@@ -22,8 +23,8 @@ const modal=css`
     flex: 0 1 1;
     margin: auto auto auto auto;
     background-color: #FFFFFF;
-    border-radius: 4pt;
-    padding: 4pt 12pt 4pt 12pt;
+    border-radius: ${Enum.sm};
+    padding: ${Enum.sm} ${Enum.lg} ${Enum.sm} ${Enum.lg};
     min-width: 25%;
     max-width: 100%;
     ${ScreenBreakpoints.sm}{
@@ -39,15 +40,16 @@ const modal=css`
 `
 
 const Modal =({show, closeHandler, children})=>{
+    
     useEffect(()=>{
         let res = document.getElementsByTagName('body')[0]
         if(show){
             res.style.overflowY="hidden"
-            console.log(res)
         }else{
             res.style.overflowY="auto"
         }
     },[show])
+    
     return (
         <div css={[modalWrapper, show ? '': css`display: none`]}>
             <div css={modal}>

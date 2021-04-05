@@ -17,6 +17,7 @@ import Header from "../../components/header.component";
 import Footer, { FooterSpacer } from "../../components/footer.component";
 import Head from "next/head";
 import { convertToStartCase } from "../../functions/text-converter";
+import { ErrorComponent } from "../../components/error.component";
 
 const Pokemons=(props)=>{
     const ps = new PokemonStorageService()
@@ -29,8 +30,8 @@ const Pokemons=(props)=>{
         GET_POKEMONS,
         {
             variables: { 
-                limit: 12,
-                offset: (page-1)*12
+                limit: 24,
+                offset: (page-1)*24
             },
         }
     )
@@ -54,43 +55,51 @@ const Pokemons=(props)=>{
             <title>Discover Pokémons</title>
         </Head>
         <Header name="Discover Pokémons"></Header>
-        <div css={[ContainerFluidCss]}>
-            <div css={[GridCSS]}>
-                {
-                    list.map(item =>{
-                        return (
+        {
+            error ?  <div css={CenterContainerCss}>
+            <ErrorComponent title="Sorry!"
+                message="There is error(s) while gathering the data. Please try again"></ErrorComponent>
+            </div>
+            :
+            <>
+              <div css={[ContainerFluidCss]}>
+                <div css={[GridCSS]}>
+                    {
+                        list.map(item =>
                             <PokemonCard
                             key={Math.random()}
-                            pokemonData={item}></PokemonCard>
+                            pokemonData={item}>
+                            </PokemonCard>
                         )
-                    })
-                }
+                    }
+                </div>
+                <div css={[CenterContainerCss]}>
+                    {
+                        loading ?
+                        <div css={CenterContainerCss}>
+                        <LoadingSpinner color="black"></LoadingSpinner>
+                        </div> : 
+                        <button
+                            css={[ButtonCss.btn, ButtonCss.primary]}
+                            onClick={()=>{
+                                    setPage(page+1)
+                                }
+                                }>
+                                Load More
+                        </button>
+                    }
+                </div>
             </div>
-            <div css={[CenterContainerCss]}>
-                {
-                    loading ?
-                    <div css={CenterContainerCss}>
-                    <LoadingSpinner color="black"></LoadingSpinner>
-                    </div> : 
-                    <button
-                        css={[ButtonCss.btn, ButtonCss.primary]}
-                        onClick={()=>{
-                                setPage(page+1)
-                            }
-                            }>
-                            Load More
-                    </button>
-                }
-            </div>
-        </div>
-        {
-            totalPokemons ? 
-            <>
-                <FooterSpacer></FooterSpacer>
-                <Footer>
-                    <div css={[css`color: white`]}>You own {ps.getCaughtPokemonTypes().length} out of {totalPokemons} Pokémons</div>
-                </Footer>   
-            </>:''
+            {
+                totalPokemons ? 
+                <>
+                    <FooterSpacer></FooterSpacer>
+                    <Footer>
+                        <div css={[css`color: white`]}>You own {ps.getCaughtPokemonTypes().length} out of {totalPokemons} Pokémons</div>
+                    </Footer>   
+                </>:''
+            }
+            </>
         }
         </>
     )
@@ -126,15 +135,19 @@ const PokemonCardCss=[
     }
 `]
 
-const PokemonCard=React.forwardRef((props, ref) => {
+const PokemonCard=({pokemonData}) => {
     const ps = new PokemonStorageService()
-    const {pokemonData} = props 
-    const [caughtList, setCaughList] = useState([]) 
-
+    const [caughtList, setCaughtList] = useState([]) 
+    
     useEffect(()=>{
-        setCaughList(ps.getSavedPokemonsByID(pokemonData.id))
-    }, [pokemonData])
+        pokemonData ?
+        setCaughtList(ps.getSavedPokemonsByID(pokemonData.id)) : null
+
+    }, [pokemonData]
+    )
+
     return (
+        pokemonData ? 
         <Link 
         href={`/discover/detail/${pokemonData.name}`}>
             <div css={ [PokemonCardCss]}>
@@ -144,10 +157,8 @@ const PokemonCard=React.forwardRef((props, ref) => {
                         caughtList.length ? <label className="in-inventory">You have {caughtList.length} in your pokemons</label> : ''
                     }
                 </div>
-                {
-                    pokemonData ? <img className="image" src={pokemonData.image}></img> : ''
-                }
+                <img className="image" src={pokemonData.image}></img>
             </div>
-        </Link>
+        </Link> : ''
     )
-})
+}

@@ -4,16 +4,17 @@ import { useQuery } from '@apollo/client';
 import { jsx, css } from '@emotion/react'
 import React, { useEffect } from 'react';
 import { useState } from "react"
-import GridCSS from '../../styles/grid';
+import Head from 'next/head'
+import Link from 'next/link'
 
+import GridCSS from '../../styles/grid';
 import { PokemonStorageService } from "../../service/pokemon-storage.service"
 import {GET_POKEMONS_DETAIL} from "../../schema/pokemon.schema";
 import ButtonCss from '../../styles/button';
 import Modal from '../../components/modal.component';
 import Toast from '../../components/toast.component';
-import Link from 'next/link'
 import { CardCSS } from '../../styles/cards';
-import { ContainerFluidCss, FlexContainerCss } from '../../styles/container';
+import { ContainerFluidCss } from '../../styles/container';
 import Header from '../../components/header.component';
 import { convertToStartCase } from '../../functions/text-converter';
 import Enum from '../../styles/enum';
@@ -49,6 +50,9 @@ const OwnedPokemons=()=>{
 
     return (
         <>
+         <Head>
+            <title>Your Pokémons</title>
+        </Head>
         <Header name="Your Pokémons"></Header>
         <div css={[ContainerFluidCss]}>
             <Toast theme={toast.theme}
