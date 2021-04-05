@@ -15,6 +15,11 @@ import { CenterContainerCss, ContainerCss, FlexContainerCss, CurvedCss} from '..
 import { PillCSS } from '../../../styles/pill';
 import ButtonCss from '../../../styles/button';
 import Header from '../../../components/header.component';
+import Head from 'next/head';
+import { convertToStartCase } from '../../../functions/text-converter';
+import Enum from '../../../styles/enum';
+import { InputCSS } from '../../../styles/input';
+import { PokemonTypeColors } from '../../../styles/colors';
 
 const bounceKeyframe = keyframes`
   from, 20%, 53%, 80%, to {
@@ -37,6 +42,23 @@ const bounceSprite = css`
     height: 144pt;
     animation: ${bounceKeyframe} 3.0s ease infinite;
 `
+const pokeballAnimationContainer=css`
+  height: 154pt;
+  width: 154pt;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: ${Enum.xl};
+  margin-bottom: ${Enum.xl};
+  position: relative;
+  .top{
+    height: 100%;
+    position: absolute
+  }
+  .bottom{
+    height: 100%;
+    position: absolute
+  }
+`
 
 const Detail=()=>{
     const router = useRouter()
@@ -51,6 +73,7 @@ const Detail=()=>{
         }
     )
 
+    const [catchAnimationModal, setAnimationModal] = useState(true) 
     const [catchModal, setCatchModal] = useState(false) 
     const [toast, setToast] = useState({shown: false, message: '', theme: ''}) 
     const [form, setForm] = useState({name: ''}) 
@@ -118,15 +141,27 @@ const Detail=()=>{
 
     return (
         <>
+        <Head>
+            <title>Pokémon Detail</title>
+        </Head>
         <Header name="Pokémon Details"></Header>
-        <div css={[CurvedCss]}></div>
-        <div css={[ContainerCss, css`margin-top: -84pt`]}>
-            <Modal
+        {/*
+         <Modal show={catchAnimationModal}>
+            <div css={pokeballAnimationContainer}>
+                <img className="top" src="/assets/images/pokeball/pokeball_top.svg"></img>
+                <img className="bottom" src="/assets/images/pokeball/pokeball.svg"></img>
+            </div>
+        </Modal>
+        */}
+
+        <Modal
             show={catchModal}>
                 <h3>You have caught this pokemon!</h3>
                 <label>Let's give it a nice nickname</label>
                 <div>
-                    <input value={form.name}
+                    <input
+                    css={[InputCSS]}
+                    value={form.name}
                     placeholder="Type nickname here..."
                     onChange={onChangeNickname}></input>
                 </div>
@@ -135,13 +170,15 @@ const Detail=()=>{
                 </button>
                 <button css={[ButtonCss.btn, ButtonCss.primary]} disabled={!form.name}
                 onClick={submitPokemon}>Save it!</button>
-            </Modal>
-            <Toast theme={toast.theme}
+        </Modal>
+        <Toast theme={toast.theme}
             show={toast.shown}
             timeout="3000"
             closeHandler={closeToast}>
                 <h5>{toast.message}</h5>
-            </Toast>
+        </Toast>
+        <div css={[CurvedCss]}></div>
+        <div css={[ContainerCss, css`margin-top: -84pt`]}>
             {
                 loading ?
                 <div css={CenterContainerCss}>
@@ -164,28 +201,32 @@ const Detail=()=>{
                             <img src={data.pokemon.sprites.front_default}
                             css={[bounceSprite]}/>
                         </div>
-                        <h1 css={css`text-align:center; margin-top: 0`}>{data.pokemon.name}</h1>
-                        <div>
-                            <h3>Moves</h3>
+                        <h1 css={css`text-align:center; margin-top: 0`}>{ convertToStartCase(data.pokemon.name) }</h1>
+                        <div css={css`margin-bottom: ${Enum.xl}`}>
+                            <h3>Moves ({data.pokemon.moves.length})</h3>
                             <SeeMore
-                            minHeight="3em">
+                            minHeight="2em">
                                 <div css={FlexContainerCss}>
                                 {
                                     data.pokemon.moves.map((item, index)=>{
-                                        return <div key={index} css={[PillCSS.pill, PillCSS.info]}>{item.move.name}</div>
+                                        return <div key={index} css={[PillCSS.pill, PillCSS.outline]}>{
+                                            convertToStartCase(item.move.name)
+                                        }</div>
                                     })
                                 }      
                                 </div>           
                             </SeeMore>
                         </div>
-                        <div>
+                        <div css={css`margin-bottom: ${Enum.xl}`}>
                             <h3>Types</h3>
                             <SeeMore
                             minHeight="2em">
                                 <div css={FlexContainerCss}>
                                 {
                                     data.pokemon.types.map((item, index)=>{
-                                        return <div key={index} css={[PillCSS.pill, PillCSS.info]}>{item.type.name}</div>
+                                        return <div key={index} css={[PillCSS.pill, css`font-weight: 500; background: ${PokemonTypeColors[item.type.name]+'A0'}`]}>{
+                                            convertToStartCase(item.type.name)
+                                        }</div>
                                     })
                                 }      
                                 </div>           
@@ -204,7 +245,7 @@ const Detail=()=>{
                             title="Uh Oh!"
                             message="We can't find pokemon what you are looking for">     
                         </ErrorComponent>
-                        <button css={[ButtonCss.btn, ButtonCss.info, css`margin-top: 8pt`]}
+                        <button css={[ButtonCss.btn, ButtonCss.info, css`margin-top: ${Enum.sm}`]}
                         onClick={()=>{router.replace('/discover')}}>
                             Click Here to return to Pokemon list
                         </button>

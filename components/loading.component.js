@@ -26,6 +26,8 @@ export const LoadingSpinner=({color})=>{
             css={css`
             margin-top: 12pt;
             margin-bottom: 12pt;
+            font-size: 14pt;
+            font-weight: bold;
             animation: ${bounce} 0.8s ease infinite;
             color: ${color ? color : 'white'};
             `}>

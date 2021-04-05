@@ -74,7 +74,7 @@ const Toast =({show, theme, timeout, closeHandler, children})=>{
         <div css={[toastWrapper, show ? '': css`display: none`]}>
             <div css={[toast, theme ? toastTheme[theme] : '', css`cursor: pointer`]}
                 onClick={dismiss}>
-                <div class="content">
+                <div className="content">
                     {children}
                 </div>
             </div>

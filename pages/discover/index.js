@@ -15,12 +15,15 @@ import { CenterContainerCss, ContainerFluidCss } from "../../styles/container";
 import ButtonCss from "../../styles/button";
 import Header from "../../components/header.component";
 import Footer, { FooterSpacer } from "../../components/footer.component";
+import Head from "next/head";
+import { convertToStartCase } from "../../functions/text-converter";
 
 const Pokemons=(props)=>{
     const ps = new PokemonStorageService()
 
     const [page, setPage]=useState(1)
     const [list, setList]=useState([])
+    const [totalPokemons, setTotalPokemons]=useState(null)
     
     const { loading, error, data, refetch } = useQuery(
         GET_POKEMONS,
@@ -40,11 +43,16 @@ const Pokemons=(props)=>{
         if(data){
             let {results} = data.pokemons
             setList(list => list.concat(results))
+
+            setTotalPokemons(data.pokemons.count)
         }
     },[data])
 
     return (
         <>
+        <Head>
+            <title>Discover Pokémons</title>
+        </Head>
         <Header name="Discover Pokémons"></Header>
         <div css={[ContainerFluidCss]}>
             <div css={[GridCSS]}>
@@ -58,29 +66,29 @@ const Pokemons=(props)=>{
                     })
                 }
             </div>
-            {
-                loading ?
-                <div css={CenterContainerCss}>
-                <LoadingSpinner color="black"></LoadingSpinner>
-                </div> : ''
-            }
-        </div>
-        <div css={[CenterContainerCss]}>
-            <button
-                css={[ButtonCss.primary]}
-                onClick={()=>{
-                        setPage(page+1)
-                    }
-                    }>
-                    Load More
-            </button>
+            <div css={[CenterContainerCss]}>
+                {
+                    loading ?
+                    <div css={CenterContainerCss}>
+                    <LoadingSpinner color="black"></LoadingSpinner>
+                    </div> : 
+                    <button
+                        css={[ButtonCss.btn, ButtonCss.primary]}
+                        onClick={()=>{
+                                setPage(page+1)
+                            }
+                            }>
+                            Load More
+                    </button>
+                }
+            </div>
         </div>
         {
-            data ? 
+            totalPokemons ? 
             <>
                 <FooterSpacer></FooterSpacer>
                 <Footer>
-                    <div css={[css`color: white`]}>You own {ps.getCaughtPokemonTypes().length} out of {data.pokemons.count} Pokémons</div>
+                    <div css={[css`color: white`]}>You own {ps.getCaughtPokemonTypes().length} out of {totalPokemons} Pokémons</div>
                 </Footer>   
             </>:''
         }
@@ -131,7 +139,7 @@ const PokemonCard=React.forwardRef((props, ref) => {
         href={`/discover/detail/${pokemonData.name}`}>
             <div css={ [PokemonCardCss]}>
                 <div className="header">
-                    <h2 className="title">{pokemonData.name}</h2>
+                    <h2 className="title">{convertToStartCase(pokemonData.name)}</h2>
                     {
                         caughtList.length ? <label className="in-inventory">You have {caughtList.length} in your pokemons</label> : ''
                     }

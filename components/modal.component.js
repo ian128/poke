@@ -23,16 +23,18 @@ const modal=css`
     background-color: #FFFFFF;
     border-radius: 4pt;
     padding: 4pt 12pt 4pt 12pt;
-    width: 100%;
+    min-width: 25%;
+    max-width: 100%;
     ${ScreenBreakpoints.sm}{
-        width: 100%
+        maxwidth: 100%
     }
     ${ScreenBreakpoints.md}{
-        width: 75%
+        max-width: 75%
     }
     ${ScreenBreakpoints.lg}{
-        width: 50%
+        max-width: 50%
     }
+
 `
 
 const Modal =({show, closeHandler, children})=>{

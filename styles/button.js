@@ -6,13 +6,14 @@ const ButtonCss={
   btn: css`
     margin-right: ${Enum.xs};
     margin-bottom: ${Enum.xs};
-    padding: 8pt 8pt 8pt 8pt;
-    margin-bottom: 8pt;
-    border-radius: 4pt;
+    padding: ${Enum.sm} ${Enum.lg} ${Enum.sm} ${Enum.lg};
+    margin-bottom: ${Enum.sm};
+    border-radius: ${Enum.xs};
     cursor: pointer;
-    margin-bottom: 8pt;
+    margin-bottom: ${Enum.sm};
     animation: all 0.3s;
     outline: none;
+    border: none;
     &:hover{
       filter: brightness(1.1);
     }

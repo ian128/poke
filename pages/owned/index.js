@@ -13,18 +13,20 @@ import Modal from '../../components/modal.component';
 import Toast from '../../components/toast.component';
 import Link from 'next/link'
 import { CardCSS } from '../../styles/cards';
-import { ContainerFluidCss } from '../../styles/container';
+import { ContainerFluidCss, FlexContainerCss } from '../../styles/container';
 import Header from '../../components/header.component';
+import { convertToStartCase } from '../../functions/text-converter';
+import Enum from '../../styles/enum';
 
 const OwnedPokemons=()=>{
     const ps = new PokemonStorageService()
 
     const [list, setList]=useState(()=> ps.getSavedPokemons())
-    const [releaseModal, setReleaseModal] = useState({open: false, nickname: ''}) 
+    const [releaseModal, setReleaseModal] = useState({open: false, pokemon: '', nickname: ''}) 
     const [toast, setToast] = useState({shown: false, message: '', theme: ''}) 
 
     const promptReleasePokemon=(data)=>{
-        setReleaseModal({open: true, nickname: data.nickname})
+        setReleaseModal({open: true, pokemon: data.pokemon_name,nickname: data.nickname})
     }
 
     const releasePokemon=()=>{
@@ -56,15 +58,18 @@ const OwnedPokemons=()=>{
                 <h5>{toast.message}</h5>
             </Toast>
             <Modal show={releaseModal.open}>
-                <h3>Do you want to release pokemon with nickname {releaseModal.nickname}?</h3>
-                <button css={[ButtonCss.btn]}
-                onClick={closeReleasePokemon}>
-                        No
-                </button>
-                <button css={[ButtonCss.btn, ButtonCss.primary]}
-                onClick={releasePokemon}>
-                        Yes, Release
-                </button>
+                <h3>Confirm</h3>
+                <div css={css`margin-bottom: ${Enum.md}`}>Do you want to release pokemon { convertToStartCase(releaseModal.pokemon) } with nickname {releaseModal.nickname}?</div>
+                <div css={css`text-align: end`}>
+                    <button css={[ButtonCss.btn]}
+                    onClick={closeReleasePokemon}>
+                            No
+                    </button>
+                    <button css={[ButtonCss.btn, ButtonCss.primary]}
+                    onClick={releasePokemon}>
+                            Yes, Release
+                    </button>
+                </div>
             </Modal>
             <div css={GridCSS}>
                         {
@@ -104,7 +109,7 @@ const PokemonCard=[
     }
 
     .utility{
-        margin-top: 8pt;
+        margin-top: ${Enum.sm};
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -134,8 +139,8 @@ const MyPokemonCard=({savedData, releaseHandler})=>{
     return (
         <div css={ [PokemonCard]}>
             <div className="header">
-                <h2 css={css`margin-bottom: 0`}>{savedData.nickname}</h2>
-                <label>{savedData.pokemon_name}</label>
+                <h2 css={css`margin-bottom: ${Enum.xs}`}>{savedData.nickname}</h2>
+                <label>{convertToStartCase(savedData.pokemon_name) }</label>
             </div>
             <div className="utility">
                 <div className="time">

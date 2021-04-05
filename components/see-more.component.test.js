@@ -6,13 +6,4 @@ describe('SeeMoreComponent',()=>{
     it('renders correctly', () => {
         expect(wrapper.find('.content').hostNodes().text()).toBe("Lorem Ipsum");
     })
-
-    it('clicks see more',()=>{
-        let btn = wrapper.find(".toggle-button").hostNodes()
-        btn.find('a').simulate('click')
-     
-        expect(btn.prop("expand")).toBeTruthy()
-        expect(btn.text()).toBe('See Less')
-    })
-    
 })

@@ -7,28 +7,24 @@ import { ScreenBreakpoints } from './screenBreakpoint';
 
 export const CurvedCss= css`
     background-image: linear-gradient(to bottom right, ${ColorPallete.primary}, ${ColorPallete.secondary});
+    height: 128pt;
     ${ScreenBreakpoints.xs}{
-        height: 144pt;
         border-bottom-left-radius: 50% 40%;
         border-bottom-right-radius: 50% 40%;
     }
     ${ScreenBreakpoints.sm}{
-        height: 144pt;
         border-bottom-left-radius: 50% 35%;
         border-bottom-right-radius: 50% 35%;
     }
     ${ScreenBreakpoints.md}{
-        height: 144pt;
         border-bottom-left-radius: 50% 40%;
         border-bottom-right-radius: 50% 40%;
     }
     ${ScreenBreakpoints.lg}{
-        height: 144pt;
         border-bottom-left-radius: 50% 40%;
         border-bottom-right-radius: 50% 40%;
     }
     ${ScreenBreakpoints.xl}{
-        height: 144pt;
         border-bottom-left-radius: 50% 40%;
         border-bottom-right-radius: 50% 40%;
     }
@@ -72,5 +68,5 @@ export const CenterContainerCss=css`
 
 export const FlexContainerCss=css`
     display: flex;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 `
