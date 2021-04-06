@@ -150,7 +150,7 @@ const Detail=()=>{
             <title>Pokémon Detail</title>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
         </Head>
-        <Header name="Pokémon Details" previousUrl="/discover"></Header>
+        <Header name="Pokémon Detail" previousUrl="/discover"></Header>
         
         <Modal show={catchAnimationModal}>
             <div css={pokeballAnimationContainer}>
@@ -160,14 +160,14 @@ const Detail=()=>{
         </Modal>
 
         <Modal show={catchFailModal}>
-            <h3>Oops, he/she has gone away!</h3>
+            <h3>Oops, this pokémon has gone away!</h3>
             <button css={[ButtonCss.btn, ButtonCss.primary]}
                 onClick={()=>{setCatchFailModal(false)}}> Dismiss</button>
         </Modal>
 
         <Modal
             show={catchModal}>
-                <h3>You have caught this pokemon!</h3>
+                <h3>You have caught this pokémon!</h3>
                 <label>Let's give it a nice nickname</label>
                 <div>
                     <input
