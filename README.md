@@ -32,7 +32,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Live Version
-Checkout at https://pokemon-with-next-ian128.vercel.app/
+Check out at https://pokemon-with-next-ian128.vercel.app/
 
 ## Credits
 This app uses API from PokeAPI in GraphQL version
